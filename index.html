@@ -7,20 +7,26 @@
 <meta name="description" content="Eric Lee">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>∴</text></svg>">
 <link rel="stylesheet" href="style.css">
-
 </head>
+
 <body>
 <main>
   <h1>Eric Lee</h1>
+
   <nav>
     <a href="favorites.html">favorites</a>
     <a href="mailto:erhl018@gmail.com">mail</a>
     <a href="https://github.com/hynoph">github</a>
     <a href="https://www.linkedin.com/in/ericlee128/">linkedin</a>
   </nav>
+
   <p class="lede">
-    I am currently a student interested in pure mathematics, education, and research. I believe the current bottleneck for education in this world is a lack of intuitive learning and access.
+    I am currently <span id="age"></span> old. 
+    <br>
+    <br>
+    I am a student interested in pure mathematics, education, and research. I believe the current bottleneck for education in this world is a lack of intuitive learning and access.
   </p>
+
   <h2>Research</h2>
   <ul>
     <li>
@@ -28,6 +34,7 @@
       <span><a href="#">KAZE</a> — Suite of ML models for the relationship between observable atmospheric properties and the mineral composition of airborne dust.</span>
     </li>
   </ul>
+
   <h2>Projects</h2>
   <ul>
     <li>
@@ -35,7 +42,50 @@
       <span><a href="#">ManiML</a> — Creating Manim animations through ML for math education. Congressional App Challenge winner, CA-27 &amp; MIT THINK distinction.</span>
     </li>
   </ul>
+
   <footer>Last updated July 2026</footer>
 </main>
+
+<script>
+const birthday = new Date(2010, 0, 28, 12, 32, 0);
+
+function daysInMonth(year, month) {
+  return new Date(year, month + 1, 0).getDate();
+}
+
+function updateAge() {
+  const now = new Date();
+
+  let years = now.getFullYear() - birthday.getFullYear();
+  let months = now.getMonth() - birthday.getMonth();
+  let days = now.getDate() - birthday.getDate();
+  let hours = now.getHours() - birthday.getHours();
+  let minutes = now.getMinutes() - birthday.getMinutes();
+  let seconds = now.getSeconds() - birthday.getSeconds();
+
+  if (seconds < 0) { seconds += 60; minutes--; }
+  if (minutes < 0) { minutes += 60; hours--; }
+  if (hours < 0) { hours += 24; days--; }
+
+  if (days < 0) {
+    const prevMonth = (now.getMonth() + 11) % 12;
+    const prevYear = prevMonth === 11 ? now.getFullYear() - 1 : now.getFullYear();
+    days += daysInMonth(prevYear, prevMonth);
+    months--;
+  }
+
+  if (months < 0) {
+    months += 12;
+    years--;
+  }
+
+  document.getElementById("age").textContent =
+    `${years} years, ${months} months, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+}
+
+updateAge();
+setInterval(updateAge, 1000);
+</script>
+
 </body>
 </html>

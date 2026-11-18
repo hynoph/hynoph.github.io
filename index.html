@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Eric Lee</title>
 <meta name="description" content="">
@@ -116,11 +117,11 @@
   <aside>
     <div class="name" data-go="about">Eric Lee</div>
     <nav>
-      <a href="#about" data-go="about">about</a>
-      <a href="#photography" data-go="photography">photography</a>
-      <a href="#projects" data-go="projects">projects</a>
-      <a href="#likes" data-go="likes">things i like</a>
-      <a href="#records" data-go="records">records</a>
+      <a href="/" data-go="about">about</a>
+      <a href="/photography/" data-go="photography">photography</a>
+      <a href="/projects/" data-go="projects">projects</a>
+      <a href="/likes/" data-go="likes">things i like</a>
+      <a href="/records/" data-go="records">records</a>
     </nav>
     <div class="links">
       <a href="https://github.com/hynoph">github</a>
@@ -256,14 +257,25 @@
     document.querySelectorAll("section").forEach(s => s.classList.toggle("active", s.id === id));
     document.querySelectorAll("nav a").forEach(a => a.classList.toggle("active", a.dataset.go === id));
   }
-  // Switch tabs in place: no jump to the section anchor, stay at the top.
+  // Each tab has its own path (erichl.com/records/); build.py writes a copy of this page for each.
+  const TABS = ["about", "photography", "projects", "likes", "records"];
+  const pathFor = id => id === "about" ? "/" : "/" + id + "/";
+  const tabFromPath = () => {
+    const id = location.pathname.split("/").filter(Boolean)[0];
+    return TABS.includes(id) ? id : "about";
+  };
+  // Switch tabs in place: no page reload, no jump, stay at the top.
   document.querySelectorAll("[data-go]").forEach(a => a.addEventListener("click", e => {
     e.preventDefault();
-    history.replaceState(null, "", "#" + a.dataset.go);
+    history.pushState(null, "", pathFor(a.dataset.go));
     go(a.dataset.go);
     window.scrollTo(0, 0);
   }));
-  go(location.hash.slice(1) || "about");
+  window.addEventListener("popstate", () => go(tabFromPath()));
+  // Old links like erichl.com/#records still work.
+  const legacy = location.hash.slice(1);
+  if (TABS.includes(legacy)) history.replaceState(null, "", pathFor(legacy));
+  go(tabFromPath());
   window.scrollTo(0, 0);
 </script>
 </body>

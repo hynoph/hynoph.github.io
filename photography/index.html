@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<base href="/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eric Lee</title>
+<meta name="description" content="">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://erichl.com/photography/">
+<meta property="og:title" content="Eric Lee">
+<meta property="og:description" content="">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Eric Lee">
+<meta name="twitter:description" content="">
+<link rel="icon" href="favicon.png?v=2" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400&text=%ED%95%98%EB%9E%91&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fcfcfa;
+    --ink: #222;
+    --muted: #6b7a6b;
+    --rule: #e4e4e0;
+    --serif: "Newsreader", Georgia, serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #151515; --ink: #e8e8e4; --muted: #8fa08f; --rule: #2c2c2c; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--mono); font-size: 13px; }
+  a { color: inherit; text-decoration: none; }
+
+  .layout { display: grid; grid-template-columns: 224px 1fr; min-height: 100vh; }
+  aside {
+    position: sticky; top: 0; height: 100vh;
+    padding: 40px 0 40px 48px; border-right: 1px solid var(--rule);
+    display: flex; flex-direction: column;
+  }
+  .name { font-family: var(--serif); font-size: 21px; margin: 0 0 48px; cursor: pointer; }
+  nav a, .links a { display: block; margin: 0 0 14px; }
+  nav a.active { text-decoration: underline; text-underline-offset: 4px; }
+  .links { margin-top: auto; margin-bottom: 40px; }
+
+  main { padding: 40px 100px; max-width: 1200px; }
+  section { display: none; }
+  section.active { display: block; }
+
+  /* about */
+  .about-wrap { display: flex; flex-direction: column; gap: 40px; }
+  .portrait { margin: 0; max-width: 880px; }
+  .portrait img { width: 100%; display: block; background: var(--rule); }
+  .portrait figcaption { color: var(--muted); margin-top: 10px; }
+  .about { max-width: 560px; font-family: var(--serif); font-size: 18px; line-height: 1.6; }
+  .about h1 .aka { font-family: "Noto Serif KR", var(--serif); font-size: 20px; font-weight: 400; color: var(--muted); margin-left: 6px; }
+  .about h1 { font-weight: 500; font-size: 30px; margin: 0 0 16px; }
+
+  /* things i like */
+  .likes { max-width: 560px; }
+  .likes h2 { font-size: 13px; font-weight: 400; color: var(--muted); margin: 0 0 12px; }
+  .likes ul { list-style: none; padding: 0; margin: 0 0 36px; font-family: var(--serif); font-size: 18px; line-height: 1.5; }
+  .likes li { margin-bottom: 6px; }
+  .wip { color: var(--muted); margin: 0; }
+
+  /* projects */
+  .projects { max-width: 640px; }
+  .project { margin-bottom: 36px; }
+  .project .title { font-family: var(--serif); font-size: 20px; }
+  .project a.title { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--muted); }
+  .project .meta { color: var(--muted); margin-top: 6px; }
+  .project .small-note { color: var(--muted); font-size: 13px; white-space: nowrap; }
+  .project .meta a { text-decoration: underline; text-underline-offset: 3px; }
+  .project p { font-family: var(--serif); font-size: 17px; line-height: 1.6; margin: 8px 0 0; }
+  .project code { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+
+  /* records */
+  .records { max-width: 560px; font-family: var(--serif); font-size: 18px; line-height: 1.6; }
+  .records p { margin: 0 0 20px; }
+  .records a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--muted); }
+  .records .small { white-space: nowrap; font-family: var(--mono); font-size: 13px; color: var(--muted); }
+
+  .likes li span { font-family: var(--mono); font-size: 13px; color: var(--muted); margin-left: 8px; }
+
+  /* masonry grid shared by photos + projects */
+  .grid { columns: 3 320px; column-gap: 20px; }
+  .item { break-inside: avoid; margin: 0 0 36px; }
+  .item img { width: 100%; display: block; background: var(--rule); }
+  .item .title { display: inline-block; margin-top: 12px; border-bottom: 1px solid var(--muted); }
+  .item .meta { color: var(--muted); margin-top: 6px; line-height: 1.6; }
+  .item .note { margin-top: 2px; }
+
+  .credit { color: var(--muted); font-size: 11px; margin: 28px 48px 0 0; line-height: 1.5; }
+  .credit + .credit { margin-top: 6px; }
+  .credit a { white-space: nowrap; }
+  .credit a { display: inline; margin: 0; text-decoration: underline; text-underline-offset: 3px; }
+  .mobile-links { display: none; }
+
+  @media (max-width: 760px) {
+    .mobile-links .credit { flex-basis: 100%; margin: 4px 0 0; }
+    .mobile-links { display: flex; flex-wrap: wrap; gap: 16px; padding: 24px 16px 32px; border-top: 1px solid var(--rule); }
+    .layout { grid-template-columns: 1fr; align-content: start; }
+    aside { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--rule); padding: 24px 16px 8px; }
+    .name { margin-bottom: 20px; }
+    nav { display: flex; gap: 8px 16px; flex-wrap: wrap; margin-bottom: 14px; }
+    nav a { margin: 0; }
+    .links { display: none; }
+    main { padding: 24px 16px; }
+    .about-wrap { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside>
+    <div class="name" data-go="about">Eric Lee</div>
+    <nav>
+      <a href="/" data-go="about">about</a>
+      <a href="/photography/" data-go="photography">photography</a>
+      <a href="/projects/" data-go="projects">projects</a>
+      <a href="/likes/" data-go="likes">things i like</a>
+      <a href="/records/" data-go="records">records</a>
+    </nav>
+    <div class="links">
+      <a href="https://github.com/hynoph">github</a>
+      <a href="https://www.linkedin.com/in/ericlee128">linkedin</a>
+      <a href="mailto:erhl018@gmail.com">email</a>
+      <p class="credit">inspired by my friend <a href="https://aidenseo.com">aidenseo.com</a></p><p class="credit">favicon: <a href="https://www.youtube.com/results?search_query=xi+FREEDOM+DiVE">FREEDOM DiVE↓︎</a></p>
+    </div>
+  </aside>
+
+  <main>
+    <section id="about">
+      <div class="about-wrap">
+      <figure class="portrait">
+        <img src="photos/me.jpg" alt="Eric looking up at a rainbow over the Brooklyn skyline">
+        <figcaption>Brooklyn, Nikon D5000, 2026, f/4 1/80s, RAW</figcaption>
+      </figure>
+      <div class="about">
+        <h1>Eric Lee <span class="aka" lang="ko">하랑</span></h1>
+        <p>Junior at Fair Lawn High School interested in mathematics and its applications.</p>
+        <p>Currently, I enjoy <a href="https://en.wikipedia.org/wiki/Rhythm_game" style="text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--muted)">VSRGs</a>, exploring new places, and photography.</p>
+        <p>FREEDOM DiVER<span style="font-family: var(--mono)">↓</span></p>
+      </div>
+      </div>
+    </section>
+
+    <section id="photography">
+      <p class="wip" style="margin-bottom: 24px">wip</p>
+      <div class="grid" id="photos"></div>
+    </section>
+
+    <section id="projects">
+      <p class="wip" style="margin-bottom: 24px">wip</p>
+      <div class="projects">
+        <div class="project">
+          <span class="title">Manigent</span> <span class="small-note">(formerly ManiML)</span>
+          <div class="meta">ML, Manim · Congressional App Challenge winner (CA-27) · MIT THINK distinction</div>
+          <p>Generates Manim math animations from natural language, for math education.</p>
+        </div>
+        <div class="project">
+          <span class="title">AmazEval</span>
+          <div class="meta">ML, bioacoustics · presented at MIT URTC 2026 · to appear in IEEE Xplore</div>
+          <p>Benchmarks bird-sound AI on Amazon recordings, weighting endangered species more.</p>
+        </div>
+        <div class="project">
+          <span class="title">KAZE</span> <span class="small-note">(Knowledge-Assisted Zephyr Estimation)</span>
+          <div class="meta">ML, climate data · poster, AGU Fall Meeting 2026</div>
+          <p>Machine learning models that estimate the mineral makeup of Saharan dust from satellite and weather data. Built with collaborators.</p>
+        </div>
+        <div class="project">
+          <a class="title" href="https://pypi.org/project/pypebbling/">pypebbling</a>
+          <div class="meta">Python, 2026 · <a href="https://github.com/hynoph/pebbling">github</a></div>
+          <p>Exact solver for graph pebbling. Every answer comes with a move-by-move certificate anyone can replay. <code>pip install pypebbling</code></p>
+        </div>
+        <div class="project">
+          <span class="title">A counterexample to a conjecture of Petr, Portier and Stolarczyk</span>
+          <div class="meta">optimal pebbling, 2026 · <a href="counterexample.json">certificate</a></div>
+          <p>A solvable pebble distribution on a 10×10 grid that disproves Conjecture 4.1 of Petr, Portier and Stolarczyk (<i>Discrete Mathematics</i>, 2023). There are more on larger grids, including ones that break the stronger hemmed version of the conjecture (smallest 18×18).</p>
+        </div>
+        <div class="project">
+          <span class="title">An improved lower bound for optimal pebbling on grids</span> <span class="small-note">(candidate, in preparation)</span>
+          <div class="meta">optimal pebbling, 2026</div>
+          <p>Improves the constant <i>c</i> in the lower bound <span style="white-space: nowrap">π<sub>opt</sub> ≥ <i>c</i>·nm − O(n+m)</span> for the n×m grid, from <span style="white-space: nowrap">5092/28593 ≈ 0.1781</span> (Petr, Portier and Stolarczyk) to <span style="white-space: nowrap">208/1125 ≈ 0.1849</span>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Edit freely: add or remove categories (h2) and items (li). -->
+    <section id="likes">
+      <div class="likes">
+        <h2>books</h2>
+        <ul>
+          <li>Frankenstein <span>Mary Shelley</span></li>
+          <li>Atomic Habits <span>James Clear</span></li>
+          <li>The Book of Job <span>the Bible</span></li>
+        </ul>
+        <h2>films</h2>
+        <ul>
+          <li>Your Name <span>2016</span></li>
+          <li>Weathering with You <span>2019</span></li>
+          <li>A Beautiful Mind <span>2001</span></li>
+        </ul>
+        <h2>role models</h2>
+        <ul>
+          <li>Aaron Swartz</li>
+          <li>Paul Erdős</li>
+          <li>Grant Sanderson <span>3Blue1Brown</span></li>
+          <li>Évariste Galois</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- One record per <li>: what, score, when. -->
+    <section id="records">
+      <div class="records">
+        <p>I like ultrabullet on <a href="https://lichess.org/@/GammaDanClearWhen">Lichess</a>. Current record against titled players: <b style="white-space: nowrap">5–0</b>. <span class="small">2× IM, 3× NM</span></p>
+        <p><a href="https://arithmetic.zetamac.com/">Zetamac</a>: 73</p>
+        <p><a href="https://donttap.com/">Don't Tap the White Tile</a> (Frenzy): 714</p>
+        <p>Peak <a href="https://osu.ppy.sh/users/20084059">osu!mania</a> rank: #732 global <span class="small">Oct 2022</span></p>
+        <p>Krillion (daily): 595/700</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mobile-links">
+    <a href="https://github.com/hynoph">github</a>
+    <a href="https://www.linkedin.com/in/ericlee128">linkedin</a>
+    <a href="mailto:erhl018@gmail.com">email</a>
+    <p class="credit">inspired by my friend <a href="https://aidenseo.com">aidenseo.com</a></p><p class="credit">favicon: <a href="https://www.youtube.com/results?search_query=xi+FREEDOM+DiVE">FREEDOM DiVE↓︎</a></p>
+  </footer>
+</div>
+
+<script>
+  // Edit these lists. For photos, swap `src` for your own files (e.g. "photos/fog.jpg").
+  const photos = [
+    { src: "photos/reading.jpg", title: "Reading, Brooklyn", meta: "Nikon D5000, 2026, f/4.5 1/60s, RAW" },
+    { src: "photos/steeple.jpg", title: "Steeple at Dusk", meta: "Galaxy S25 Ultra, 2026, f/1.7 1/50s, RAW" },
+  ];
+
+
+
+  function render(list, el) {
+    el.innerHTML = list.map(p => `
+      <figure class="item" style="margin:0 0 36px">
+        <img src="${p.src}" alt="${p.title}" loading="lazy">
+        <div><span class="title">${p.title}</span></div>
+        <div class="meta">${p.meta}</div>
+        ${p.note ? `<div class="note">${p.note}</div>` : ""}
+      </figure>`).join("");
+  }
+  render(photos, document.getElementById("photos"));
+
+  function go(id) {
+    document.querySelectorAll("section").forEach(s => s.classList.toggle("active", s.id === id));
+    document.querySelectorAll("nav a").forEach(a => a.classList.toggle("active", a.dataset.go === id));
+  }
+  // Each tab has its own path (erichl.com/records/); build.py writes a copy of this page for each.
+  const TABS = ["about", "photography", "projects", "likes", "records"];
+  const pathFor = id => id === "about" ? "/" : "/" + id + "/";
+  const tabFromPath = () => {
+    const id = location.pathname.split("/").filter(Boolean)[0];
+    return TABS.includes(id) ? id : "about";
+  };
+  // Switch tabs in place: no page reload, no jump, stay at the top.
+  document.querySelectorAll("[data-go]").forEach(a => a.addEventListener("click", e => {
+    e.preventDefault();
+    history.pushState(null, "", pathFor(a.dataset.go));
+    go(a.dataset.go);
+    window.scrollTo(0, 0);
+  }));
+  window.addEventListener("popstate", () => go(tabFromPath()));
+  // Old links like erichl.com/#records still work.
+  const legacy = location.hash.slice(1);
+  if (TABS.includes(legacy)) history.replaceState(null, "", pathFor(legacy));
+  go(tabFromPath());
+  window.scrollTo(0, 0);
+</script>
+</body>
+</html>

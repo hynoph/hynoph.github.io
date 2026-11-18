@@ -68,10 +68,13 @@
   .item .meta { color: var(--muted); margin-top: 6px; line-height: 1.6; }
   .item .note { margin-top: 2px; }
 
+  .credit { color: var(--muted); font-size: 11px; margin: 28px 48px 0 0; line-height: 1.5; }
+  .credit a { display: inline; margin: 0; text-decoration: underline; text-underline-offset: 3px; }
   .mobile-links { display: none; }
 
   @media (max-width: 760px) {
-    .mobile-links { display: flex; gap: 16px; padding: 24px 16px 32px; border-top: 1px solid var(--rule); }
+    .mobile-links .credit { flex-basis: 100%; margin: 4px 0 0; }
+    .mobile-links { display: flex; flex-wrap: wrap; gap: 16px; padding: 24px 16px 32px; border-top: 1px solid var(--rule); }
     .layout { grid-template-columns: 1fr; align-content: start; }
     aside { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--rule); padding: 24px 16px 8px; }
     .name { margin-bottom: 20px; }
@@ -98,6 +101,7 @@
       <a href="https://github.com/hynoph">github</a>
       <a href="https://www.linkedin.com/in/ericlee128">linkedin</a>
       <a href="mailto:erhl018@gmail.com">email</a>
+      <p class="credit">inspired by my friend <a href="https://aidenseo.com">aidenseo.com</a></p>
     </div>
   </aside>
 
@@ -172,6 +176,7 @@
     <a href="https://github.com/hynoph">github</a>
     <a href="https://www.linkedin.com/in/ericlee128">linkedin</a>
     <a href="mailto:erhl018@gmail.com">email</a>
+    <p class="credit">inspired by my friend <a href="https://aidenseo.com">aidenseo.com</a></p>
   </footer>
 </div>
 

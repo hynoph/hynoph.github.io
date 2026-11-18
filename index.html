@@ -52,6 +52,15 @@
   .likes li { margin-bottom: 6px; }
   .wip { color: var(--muted); margin: 0; }
 
+  /* projects */
+  .projects { max-width: 640px; }
+  .project { margin-bottom: 36px; }
+  .project .title { font-family: var(--serif); font-size: 20px; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--muted); }
+  .project .meta { color: var(--muted); margin-top: 6px; }
+  .project .meta a { text-decoration: underline; text-underline-offset: 3px; }
+  .project p { font-family: var(--serif); font-size: 17px; line-height: 1.6; margin: 8px 0 0; }
+  .project code { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+
   /* records */
   .records { max-width: 560px; font-family: var(--serif); font-size: 18px; line-height: 1.6; }
   .records p { margin: 0 0 20px; }
@@ -126,7 +135,19 @@
     </section>
 
     <section id="projects">
-      <p class="wip">wip</p>
+      <p class="wip" style="margin-bottom: 24px">wip</p>
+      <div class="projects">
+        <div class="project">
+          <a class="title" href="https://pypi.org/project/pypebbling/">pypebbling</a>
+          <div class="meta">Python, 2026 · <a href="https://github.com/hynoph/pebbling">github</a></div>
+          <p>Exact solver for graph pebbling. Every answer comes with a move-by-move certificate anyone can replay. <code>pip install pypebbling</code></p>
+        </div>
+        <div class="project">
+          <a class="title" href="https://github.com/hynoph/pebbling/blob/main/docs/counterexample_conj41.pdf">A counterexample to a conjecture of Petr, Portier and Stolarczyk</a>
+          <div class="meta">optimal pebbling, 2026 · <a href="https://github.com/hynoph/pebbling/blob/main/docs/counterexample_conj41.pdf">pdf</a></div>
+          <p>A solvable pebble distribution on a 10×10 grid that disproves Conjecture 4.1 of Petr, Portier and Stolarczyk (<i>Discrete Mathematics</i>, 2023). Found with pypebbling and checkable by hand.</p>
+        </div>
+      </div>
     </section>
 
     <!-- Edit freely: add or remove categories (h2) and items (li). -->

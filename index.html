@@ -55,7 +55,8 @@
   /* projects */
   .projects { max-width: 640px; }
   .project { margin-bottom: 36px; }
-  .project .title { font-family: var(--serif); font-size: 20px; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--muted); }
+  .project .title { font-family: var(--serif); font-size: 20px; }
+  .project a.title { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--muted); }
   .project .meta { color: var(--muted); margin-top: 6px; }
   .project .meta a { text-decoration: underline; text-underline-offset: 3px; }
   .project p { font-family: var(--serif); font-size: 17px; line-height: 1.6; margin: 8px 0 0; }
@@ -143,9 +144,14 @@
           <p>Exact solver for graph pebbling. Every answer comes with a move-by-move certificate anyone can replay. <code>pip install pypebbling</code></p>
         </div>
         <div class="project">
-          <a class="title" href="https://github.com/hynoph/pebbling/blob/main/docs/counterexample_conj41.pdf">A counterexample to a conjecture of Petr, Portier and Stolarczyk</a>
-          <div class="meta">optimal pebbling, 2026 · <a href="https://github.com/hynoph/pebbling/blob/main/docs/counterexample_conj41.pdf">pdf</a></div>
-          <p>A solvable pebble distribution on a 10×10 grid that disproves Conjecture 4.1 of Petr, Portier and Stolarczyk (<i>Discrete Mathematics</i>, 2023). Found with pypebbling and checkable by hand.</p>
+          <span class="title">A counterexample to a conjecture of Petr, Portier and Stolarczyk</span>
+          <div class="meta">optimal pebbling, 2026 · <a href="https://github.com/hynoph/pebbling/blob/main/data/counterexample_10x10.json">certificate</a></div>
+          <p>A solvable pebble distribution on a 10×10 grid that disproves Conjecture 4.1 of Petr, Portier and Stolarczyk (<i>Discrete Mathematics</i>, 2023). There are more on larger grids.</p>
+        </div>
+        <div class="project">
+          <span class="title">An improved lower bound for optimal pebbling on grids</span>
+          <div class="meta">optimal pebbling, 2026</div>
+          <p>Improves the lower bound of Petr, Portier and Stolarczyk on the optimal pebbling number of the grid.</p>
         </div>
       </div>
     </section>

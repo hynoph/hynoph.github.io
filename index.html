@@ -253,8 +253,15 @@
     document.querySelectorAll("section").forEach(s => s.classList.toggle("active", s.id === id));
     document.querySelectorAll("nav a").forEach(a => a.classList.toggle("active", a.dataset.go === id));
   }
-  document.querySelectorAll("[data-go]").forEach(a => a.addEventListener("click", () => go(a.dataset.go)));
+  // Switch tabs in place: no jump to the section anchor, stay at the top.
+  document.querySelectorAll("[data-go]").forEach(a => a.addEventListener("click", e => {
+    e.preventDefault();
+    history.replaceState(null, "", "#" + a.dataset.go);
+    go(a.dataset.go);
+    window.scrollTo(0, 0);
+  }));
   go(location.hash.slice(1) || "about");
+  window.scrollTo(0, 0);
 </script>
 </body>
 </html>

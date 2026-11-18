@@ -58,6 +58,7 @@
   .project .title { font-family: var(--serif); font-size: 20px; }
   .project a.title { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--muted); }
   .project .meta { color: var(--muted); margin-top: 6px; }
+  .project .small-note { color: var(--muted); font-size: 13px; white-space: nowrap; }
   .project .meta a { text-decoration: underline; text-underline-offset: 3px; }
   .project p { font-family: var(--serif); font-size: 17px; line-height: 1.6; margin: 8px 0 0; }
   .project code { font-family: var(--mono); font-size: 13px; color: var(--muted); }
@@ -146,12 +147,12 @@
         <div class="project">
           <span class="title">A counterexample to a conjecture of Petr, Portier and Stolarczyk</span>
           <div class="meta">optimal pebbling, 2026 · <a href="counterexample.json">certificate</a></div>
-          <p>A solvable pebble distribution on a 10×10 grid that disproves Conjecture 4.1 of Petr, Portier and Stolarczyk (<i>Discrete Mathematics</i>, 2023). There are more on larger grids.</p>
+          <p>A solvable pebble distribution on a 10×10 grid that disproves Conjecture 4.1 of Petr, Portier and Stolarczyk (<i>Discrete Mathematics</i>, 2023). There are more on larger grids, including ones that break the stronger hemmed version of the conjecture (smallest 18×18).</p>
         </div>
         <div class="project">
-          <span class="title">An improved lower bound for optimal pebbling on grids</span>
+          <span class="title">An improved lower bound for optimal pebbling on grids</span> <span class="small-note">(candidate, in preparation)</span>
           <div class="meta">optimal pebbling, 2026</div>
-          <p>Improves the lower bound of Petr, Portier and Stolarczyk on the optimal pebbling number of the grid.</p>
+          <p>Improves the constant <i>c</i> in the lower bound <span style="white-space: nowrap">π<sub>opt</sub> ≥ <i>c</i>·nm − O(n+m)</span> for the n×m grid, from <span style="white-space: nowrap">5092/28593 ≈ 0.1781</span> (Petr, Portier and Stolarczyk) to <span style="white-space: nowrap">208/1125 ≈ 0.1849</span>.</p>
         </div>
       </div>
     </section>

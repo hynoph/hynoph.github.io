@@ -1,91 +1,206 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Eric Lee</title>
-<meta name="description" content="Eric Lee">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>∴</text></svg>">
-<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fcfcfa;
+    --ink: #222;
+    --muted: #6b7a6b;
+    --rule: #e4e4e0;
+    --serif: "Newsreader", Georgia, serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #151515; --ink: #e8e8e4; --muted: #8fa08f; --rule: #2c2c2c; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--mono); font-size: 13px; }
+  a { color: inherit; text-decoration: none; }
+
+  .layout { display: grid; grid-template-columns: 224px 1fr; min-height: 100vh; }
+  aside {
+    position: sticky; top: 0; height: 100vh;
+    padding: 40px 0 40px 48px; border-right: 1px solid var(--rule);
+    display: flex; flex-direction: column;
+  }
+  .name { font-family: var(--serif); font-size: 21px; margin: 0 0 48px; cursor: pointer; }
+  nav a, .links a { display: block; margin: 0 0 14px; }
+  nav a.active { text-decoration: underline; text-underline-offset: 4px; }
+  .links { margin-top: auto; margin-bottom: 40px; }
+
+  main { padding: 40px 100px; max-width: 1200px; }
+  section { display: none; }
+  section.active { display: block; }
+
+  /* about */
+  .about-wrap { display: flex; flex-direction: column; gap: 40px; }
+  .portrait { margin: 0; max-width: 880px; }
+  .portrait img { width: 100%; display: block; background: var(--rule); }
+  .portrait figcaption { color: var(--muted); margin-top: 10px; }
+  .about { max-width: 560px; font-family: var(--serif); font-size: 18px; line-height: 1.6; }
+  .about h1 { font-weight: 500; font-size: 30px; margin: 0 0 16px; }
+
+  /* things i like */
+  .likes { max-width: 560px; }
+  .likes h2 { font-size: 13px; font-weight: 400; color: var(--muted); margin: 0 0 12px; }
+  .likes ul { list-style: none; padding: 0; margin: 0 0 36px; font-family: var(--serif); font-size: 18px; line-height: 1.5; }
+  .likes li { margin-bottom: 6px; }
+  .wip { color: var(--muted); margin: 0; }
+
+  /* records */
+  .records { max-width: 560px; font-family: var(--serif); font-size: 18px; line-height: 1.6; }
+  .records p { margin: 0 0 20px; }
+  .records a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--muted); }
+  .records .small { white-space: nowrap; font-family: var(--mono); font-size: 13px; color: var(--muted); }
+
+  .likes li span { font-family: var(--mono); font-size: 13px; color: var(--muted); margin-left: 8px; }
+
+  /* masonry grid shared by photos + projects */
+  .grid { columns: 3 320px; column-gap: 20px; }
+  .item { break-inside: avoid; margin: 0 0 36px; }
+  .item img { width: 100%; display: block; background: var(--rule); }
+  .item .title { display: inline-block; margin-top: 12px; border-bottom: 1px solid var(--muted); }
+  .item .meta { color: var(--muted); margin-top: 6px; line-height: 1.6; }
+  .item .note { margin-top: 2px; }
+
+  .mobile-links { display: none; }
+
+  @media (max-width: 760px) {
+    .mobile-links { display: flex; gap: 16px; padding: 24px 16px 32px; border-top: 1px solid var(--rule); }
+    .layout { grid-template-columns: 1fr; align-content: start; }
+    aside { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--rule); padding: 24px 16px 8px; }
+    .name { margin-bottom: 20px; }
+    nav { display: flex; gap: 8px 16px; flex-wrap: wrap; margin-bottom: 14px; }
+    nav a { margin: 0; }
+    .links { display: none; }
+    main { padding: 24px 16px; }
+    .about-wrap { gap: 24px; }
+  }
+</style>
 </head>
-
 <body>
-<main>
-  <h1>Eric Lee</h1>
+<div class="layout">
+  <aside>
+    <div class="name" data-go="about">Eric Lee</div>
+    <nav>
+      <a href="#about" data-go="about">about</a>
+      <a href="#photography" data-go="photography">photography</a>
+      <a href="#projects" data-go="projects">projects</a>
+      <a href="#likes" data-go="likes">things i like</a>
+      <a href="#records" data-go="records">records</a>
+    </nav>
+    <div class="links">
+      <a href="https://github.com/hynoph">github</a>
+      <a href="https://www.linkedin.com/in/ericlee128">linkedin</a>
+      <a href="mailto:erhl018@gmail.com">email</a>
+    </div>
+  </aside>
 
-  <nav>
-    <a href="favorites.html">favorites</a>
-    <a href="mailto:erhl018@gmail.com">mail</a>
+  <main>
+    <section id="about">
+      <div class="about-wrap">
+      <figure class="portrait">
+        <img src="photos/me.jpg" alt="Eric looking up at a rainbow over the Brooklyn skyline">
+        <figcaption>Brooklyn, Nikon D5000, 2026, f/4 1/80s, RAW</figcaption>
+      </figure>
+      <div class="about">
+        <h1>Eric Lee</h1>
+        <p>Junior at Fair Lawn High School interested in mathematics and its applications.</p>
+        <p>Currently, I enjoy <a href="https://en.wikipedia.org/wiki/Rhythm_game" style="text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--muted)">VSRGs</a>, exploring new places, and photography.</p>
+      </div>
+      </div>
+    </section>
+
+    <section id="photography">
+      <p class="wip" style="margin-bottom: 24px">wip</p>
+      <div class="grid" id="photos"></div>
+    </section>
+
+    <section id="projects">
+      <p class="wip">wip</p>
+    </section>
+
+    <!-- Edit freely: add or remove categories (h2) and items (li). -->
+    <section id="likes">
+      <div class="likes">
+        <h2>books</h2>
+        <ul>
+          <li>Frankenstein <span>Mary Shelley</span></li>
+          <li>Atomic Habits <span>James Clear</span></li>
+          <li>The Book of Job <span>the Bible</span></li>
+        </ul>
+        <h2>music</h2>
+        <ul>
+          <li>Electronic</li>
+          <li>Vocaloid</li>
+          <li>Rap</li>
+          <li>Classical</li>
+          <li>J-pop</li>
+          <li>Hyperpop</li>
+        </ul>
+        <h2>films</h2>
+        <ul>
+          <li>Your Name <span>2016</span></li>
+          <li>Weathering with You <span>2019</span></li>
+          <li>A Beautiful Mind <span>2001</span></li>
+        </ul>
+        <h2>role models</h2>
+        <ul>
+          <li>Aaron Swartz</li>
+          <li>Paul Erdős</li>
+          <li>Grant Sanderson <span>3Blue1Brown</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- One record per <li>: what, score, when. -->
+    <section id="records">
+      <div class="records">
+        <p>I like ultrabullet on <a href="https://lichess.org/@/GammaDanClearWhen">Lichess</a>. Current record against titled players: <b style="white-space: nowrap">5–0</b>. <span class="small">2× IM, 3× NM</span></p>
+        <p><a href="https://arithmetic.zetamac.com/">Zetamac</a>: 73</p>
+        <p><a href="https://donttap.com/">Don't Tap the White Tile</a> (Frenzy): 714</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mobile-links">
     <a href="https://github.com/hynoph">github</a>
-    <a href="https://www.linkedin.com/in/ericlee128/">linkedin</a>
-  </nav>
-
-  <p class="lede">
-    I am currently <span id="age"></span> old. 
-    <br>
-    <br>
-    I am a student interested in pure mathematics, education, and research. I believe the current bottleneck for education in this world is a lack of intuitive learning and access.
-  </p>
-
-  <h2>Research</h2>
-  <ul>
-    <li>
-      <span class="date">2026—</span>
-      <span><a href="#">KAZE</a> — Suite of ML models for the relationship between observable atmospheric properties and the mineral composition of airborne dust.</span>
-    </li>
-  </ul>
-
-  <h2>Projects</h2>
-  <ul>
-    <li>
-      <span class="date">2025—</span>
-      <span><a href="#">ManiML</a> — Creating Manim animations through ML for math education. Congressional App Challenge winner, CA-27 &amp; MIT THINK distinction.</span>
-    </li>
-  </ul>
-
-  <footer>Last updated July 2026</footer>
-</main>
+    <a href="https://www.linkedin.com/in/ericlee128">linkedin</a>
+    <a href="mailto:erhl018@gmail.com">email</a>
+  </footer>
+</div>
 
 <script>
-const birthday = new Date(2010, 0, 28, 12, 32, 0);
+  // Edit these lists. For photos, swap `src` for your own files (e.g. "photos/fog.jpg").
+  const photos = [
+    { src: "photos/reading.jpg", title: "Reading, Brooklyn", meta: "Nikon D5000, 2026, f/4.5 1/60s, RAW" },
+    { src: "photos/steeple.jpg", title: "Steeple at Dusk", meta: "Galaxy S25 Ultra, 2026, f/1.7 1/50s, RAW" },
+  ];
 
-function daysInMonth(year, month) {
-  return new Date(year, month + 1, 0).getDate();
-}
 
-function updateAge() {
-  const now = new Date();
 
-  let years = now.getFullYear() - birthday.getFullYear();
-  let months = now.getMonth() - birthday.getMonth();
-  let days = now.getDate() - birthday.getDate();
-  let hours = now.getHours() - birthday.getHours();
-  let minutes = now.getMinutes() - birthday.getMinutes();
-  let seconds = now.getSeconds() - birthday.getSeconds();
-
-  if (seconds < 0) { seconds += 60; minutes--; }
-  if (minutes < 0) { minutes += 60; hours--; }
-  if (hours < 0) { hours += 24; days--; }
-
-  if (days < 0) {
-    const prevMonth = (now.getMonth() + 11) % 12;
-    const prevYear = prevMonth === 11 ? now.getFullYear() - 1 : now.getFullYear();
-    days += daysInMonth(prevYear, prevMonth);
-    months--;
+  function render(list, el) {
+    el.innerHTML = list.map(p => `
+      <figure class="item" style="margin:0 0 36px">
+        <img src="${p.src}" alt="${p.title}" loading="lazy">
+        <div><span class="title">${p.title}</span></div>
+        <div class="meta">${p.meta}</div>
+        ${p.note ? `<div class="note">${p.note}</div>` : ""}
+      </figure>`).join("");
   }
+  render(photos, document.getElementById("photos"));
 
-  if (months < 0) {
-    months += 12;
-    years--;
+  function go(id) {
+    document.querySelectorAll("section").forEach(s => s.classList.toggle("active", s.id === id));
+    document.querySelectorAll("nav a").forEach(a => a.classList.toggle("active", a.dataset.go === id));
   }
-
-  document.getElementById("age").textContent =
-    `${years} years, ${months} months, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
-}
-
-updateAge();
-setInterval(updateAge, 1000);
+  document.querySelectorAll("[data-go]").forEach(a => a.addEventListener("click", () => go(a.dataset.go)));
+  go(location.hash.slice(1) || "about");
 </script>
-
 </body>
 </html>

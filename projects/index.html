@@ -97,6 +97,7 @@
   /* masonry grid shared by photos + projects */
   .grid { columns: 3 320px; column-gap: 20px; }
   .item { break-inside: avoid; margin: 0 0 36px; }
+  .item.wide { column-span: all; }
   .item img { width: 100%; display: block; background: var(--rule); }
   .item .title { display: inline-block; margin-top: 12px; border-bottom: 1px solid var(--muted); }
   .item .meta { color: var(--muted); margin-top: 6px; line-height: 1.6; }
@@ -272,7 +273,7 @@
 <script>
   // Edit these lists. For photos, swap `src` for your own files (e.g. "photos/fog.jpg").
   const photos = [
-    { src: "photos/met.jpg", title: "Dancing in the Dark", meta: "Galaxy S25 Ultra, 2026, f/1.7 1/40s, RAW" },
+    { src: "photos/met.jpg", title: "Darshan", meta: "Galaxy S25 Ultra, 2026, f/1.7 1/40s, RAW", note: "Hindu, Buddhist and Jain sculpture, Florence and Herbert Irving Galleries, The Met", wide: true },
     { src: "photos/philly.jpg", title: "Left Turn Signal", meta: "Galaxy S25 Ultra, 2026, f/3.4 1/60s" },
     { src: "photos/lehman.jpg", title: "Lehman Hall, Harvard Yard", meta: "Galaxy S25 Ultra, 2026, f/1.7 1/24s, RAW" },
     { src: "photos/reading.jpg", title: "Reading, Brooklyn", meta: "Nikon D5000, 2026, f/4.5 1/60s, RAW" },
@@ -283,7 +284,7 @@
 
   function render(list, el) {
     el.innerHTML = list.map(p => `
-      <figure class="item" style="margin:0 0 36px">
+      <figure class="item${p.wide ? " wide" : ""}" style="margin:0 0 36px">
         <img src="${p.src}" alt="${p.title}" loading="lazy">
         <div><span class="title">${p.title}</span></div>
         <div class="meta">${p.meta}</div>
